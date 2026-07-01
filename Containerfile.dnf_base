@@ -1,0 +1,9 @@
+ARG BASE_IMAGE
+
+FROM ${BASE_IMAGE}
+
+RUN dnf update -y && dnf clean all
+
+# Add caddy cert to trusted certs for HTTPS
+COPY root.crt /etc/pki/ca-trust/source/anchors/
+RUN update-ca-trust
